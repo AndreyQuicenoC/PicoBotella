@@ -1,3 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">PicoBotella</string>
+    <string name="app_name">Pico Botella</string>
+
+    <string name="presioname_label">Presióname</string>
+
+    <string name="desc_rate">Calificar aplicación</string>
+    <string name="desc_audio">Alternar sonido de fondo</string>
+    <string name="desc_instructions">Ver instrucciones del juego</string>
+    <string name="desc_challenges">Gestionar retos de la base de datos</string>
+    <string name="desc_share">Compartir aplicación con amigos</string>
+
+    <string name="desc_bottle">Botella de juego giratoria</string>
 </resources>
