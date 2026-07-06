@@ -16,7 +16,7 @@ interface ChallengeDao {
 
     // HU 6.0 Criterio 6: Obtenemos los retos ordenados por ID descendente
     // para que el reto más nuevo siempre aparezca arriba en la lista.
-    @Query("SELECT * FROM Challenge ORDER BY id DESC")
+    @Query("SELECT * FROM challenge_table ORDER BY id DESC")
     suspend fun getListChallenge(): MutableList<Challenge>
 
     @Delete

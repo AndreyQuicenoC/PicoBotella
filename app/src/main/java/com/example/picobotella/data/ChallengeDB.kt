@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.example.picobotella.model.Challenge
 import com.example.picobotella.utils.Constants.NAME_BD
 
-@Database(entities = [Challenge::class], version = 1)
+@Database(entities = [Challenge::class], version = 1, exportSchema = false)
 abstract class ChallengeDB : RoomDatabase() {
 
     abstract fun challengeDao(): ChallengeDao

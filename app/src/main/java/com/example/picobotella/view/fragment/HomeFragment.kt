@@ -36,7 +36,7 @@ class HomeFragment : Fragment() {
         setupBlinkAnimation()
     }
 
-    // Siguiendo el método exacto del profesor para los clicks y navegación
+    // Siguiendo el metodo exacto del profesor para los clicks y navegación
     private fun controladores() {
 
         // Navegación a Instrucciones (HU 5.0)
