@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Pico Botella</string>
+    <string name="splash_title">pico botella</string>
+    <string name="home_under_construction">Home en construcción</string>
 
     <string name="presioname_label">Presióname</string>
 
@@ -11,4 +13,5 @@
     <string name="desc_share">Compartir aplicación con amigos</string>
 
     <string name="desc_bottle">Botella de juego giratoria</string>
+    <string name="desc_countdown">Cuenta regresiva: %1$d</string>
 </resources>

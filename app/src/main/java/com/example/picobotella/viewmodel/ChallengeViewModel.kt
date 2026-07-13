@@ -77,37 +77,43 @@ class ChallengeViewModel(application: Application) : AndroidViewModel(applicatio
         getListChallenge()
     }
 
-    // --- LÓGICA DE GIRO Y PARTIDA ALEATORIA (HU 11 y HU 12) ---
+    // --- LÓGICA DE GIRO (HU 11) ---
     fun spinBottle() {
         if (_isSpinning.value == true) return
 
         viewModelScope.launch {
-            _isSpinning.value = true
-            _countdown.value = null
+            try {
+                _isSpinning.value = true
+                _countdown.value = null
 
-            // 1. Calcular giro aleatorio partiendo de la posición anterior (HU 11)
-            val minTurns = 4
-            val maxTurns = 8
-            val randomDegrees = Random.nextInt(minTurns * 360, maxTurns * 360).toFloat()
-            val targetDegrees = currentDegrees + randomDegrees
+                val minTurns = 4
+                val maxTurns = 8
+                val randomDegrees = Random.nextInt(minTurns * 360, maxTurns * 360).toFloat()
 
-            _bottleRotation.value = targetDegrees
-            currentDegrees = targetDegrees % 360f
+                // Siempre gira en el mismo sentido (horario), acumulando grados
+                currentDegrees += randomDegrees
+                _bottleRotation.value = currentDegrees
 
-            // Duración simulada del giro (4 segundos)
-            delay(4000)
+                delay(4000)
 
-            // 2. Cuenta regresiva en el centro (HU 11)
-            for (i in 3 downTo 0) {
-                _countdown.value = i
-                delay(1000)
+                for (i in 3 downTo 0) {
+                    _countdown.value = i
+                    delay(1000)
+                }
+
+                delay(400)
+            } finally {
+                finishSpinRound()
             }
-
-            // 3. Consumir API remota y base de datos local
-            fetchRandomChallengeAndPokemon()
         }
     }
 
+    private fun finishSpinRound() {
+        _countdown.value = null
+        _isSpinning.value = false
+    }
+
+    // Reservado para HU 12: mostrar reto aleatorio con Pokémon
     private suspend fun fetchRandomChallengeAndPokemon() {
         try {
             // Cargar retos de la BD de forma asíncrona si la lista está vacía en memoria
@@ -131,8 +137,6 @@ class ChallengeViewModel(application: Application) : AndroidViewModel(applicatio
             }
         } catch (e: Exception) {
             e.printStackTrace()
-        } finally {
-            _isSpinning.value = false
         }
     }
 
