@@ -11,67 +11,16 @@
         android:background="@drawable/bg_wood_floor"
         tools:context=".view.fragment.HomeFragment">
 
-        <LinearLayout
+        <com.example.picobotella.view.component.CustomToolbar
             android:id="@+id/customToolbar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
-            android:background="@drawable/bg_custom_toolbar"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageButton
-                android:id="@+id/btnRate"
-                android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:layout_weight="1"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="@string/desc_rate"
-                android:src="@drawable/ic_star" />
-
-            <ImageButton
-                android:id="@+id/btnAudioToggle"
-                android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:layout_weight="1"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="@string/desc_audio"
-                android:src="@drawable/ic_audio_on" />
-
-            <ImageButton
-                android:id="@+id/btnInstructions"
-                android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:layout_weight="1"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="@string/desc_instructions"
-                android:src="@drawable/ic_info" />
-
-            <ImageButton
-                android:id="@+id/btnChallenges"
-                android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:layout_weight="1"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="@string/desc_challenges"
-                android:src="@drawable/ic_add_challenge" />
-
-            <ImageButton
-                android:id="@+id/btnShare"
-                android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:layout_weight="1"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="@string/desc_share"
-                android:src="@drawable/ic_share" />
-
-        </LinearLayout>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <FrameLayout
             android:id="@+id/bottleContainer"
