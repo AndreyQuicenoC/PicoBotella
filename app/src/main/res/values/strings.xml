@@ -13,4 +13,5 @@
     <string name="desc_share">Compartir aplicación con amigos</string>
 
     <string name="desc_bottle">Botella de juego giratoria</string>
+    <string name="desc_countdown">Cuenta regresiva: %1$d</string>
 </resources>
