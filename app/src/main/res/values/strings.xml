@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Pico Botella</string>
+    <string name="splash_title">pico botella</string>
+    <string name="home_under_construction">Home en construcción</string>
 
     <string name="presioname_label">Presióname</string>
 
