@@ -1,24 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/bg_wood_floor"
-    tools:context=".view.fragment.InstructionsFragment">
+    xmlns:tools="http://tools.android.com/ Carb">
+    <!-- HU 5.0: Instrucciones del juego -->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="24dp"
-        android:text="@string/instructions_under_construction"
-        android:textColor="@color/orange_primary"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <!-- Fondo Gris #333333 (Criterio 2) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#333333"
+        tools:context=".view.RulesFragment">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Toolbar Personalizada (Criterio 3) -->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarRules"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/ic_arrow_back">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/rules_toolbar_title"
+                android:textColor="#FF5722"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+        </androidx.appcompat.widget.Toolbar>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <!-- Título y Sección: ¿Cómo se juega? (Criterio 4 y 5) -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rules_title_how_to_play"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rules_desc_how_to_play"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:lineSpacingMultiplier="1.2"
+                    android:layout_marginBottom="24dp" />
+
+                <!-- Título y Sección: ¿Quién gana? (Criterio 6 y 7) -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rules_title_who_wins"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rules_desc_who_wins"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:layout_marginBottom="32dp" />
+
+                <!-- Animación de Triunfo (Criterio 8) -->
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/animationVictory"
+                    android:layout_width="220dp"
+                    android:layout_height="220dp"
+                    android:layout_gravity="center_horizontal"
+                    app:lottie_rawRes="@raw/anim_victory"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    tools:src="@drawable/img_victory_placeholder" />
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</layout>

@@ -43,12 +43,16 @@ class HomeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        // Si la app vuelve a primer plano, sincroniza con el estado global del ViewModel
         if (challengeViewModel.isAudioOn.value == true) {
             backgroundAudioManager?.start()
+        } else {
+            backgroundAudioManager?.pause()
         }
     }
 
     override fun onPause() {
+        // Si el usuario minimiza la app por completo o sale al sistema operativo, paramos el audio de fondo
         backgroundAudioManager?.pause()
         super.onPause()
     }

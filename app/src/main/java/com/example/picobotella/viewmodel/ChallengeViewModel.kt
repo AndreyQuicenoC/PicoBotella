@@ -47,6 +47,13 @@ class ChallengeViewModel(application: Application) : AndroidViewModel(applicatio
         _isAudioOn.value = !(_isAudioOn.value ?: true)
     }
 
+    // Permite forzar un estado específico de audio
+    fun setAudioState(isOn: Boolean) {
+        if (_isAudioOn.value != isOn) {
+            _isAudioOn.value = isOn
+        }
+    }
+
     // --- LÓGICA CRUD DE RETOS ALINEADA AL DOCENTE ---
     fun getListChallenge() {
         _progresState.value = true
