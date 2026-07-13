@@ -21,25 +21,6 @@
         android:id="@+id/homeFragment"
         android:name="com.example.picobotella.view.fragment.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home">
-        <action
-            android:id="@+id/action_homeFragment_to_instructionsFragment"
-            app:destination="@id/instructionsFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_challengeListFragment"
-            app:destination="@id/challengeListFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/instructionsFragment"
-        android:name="com.example.picobotella.view.fragment.InstructionsFragment"
-        android:label="fragment_instructions"
-        tools:layout="@layout/fragment_instructions" />
-
-    <fragment
-        android:id="@+id/challengeListFragment"
-        android:name="com.example.picobotella.view.fragment.ChallengeListFragment"
-        android:label="fragment_challenge_list"
-        tools:layout="@layout/fragment_challenge_list" />
+        tools:layout="@layout/fragment_home" />
 
 </navigation>
