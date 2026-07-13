@@ -36,6 +36,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         backgroundAudioManager = BackgroundAudioManager(requireContext())
         setupBlinkAnimation()
+        setupToolbar()
         setupControllers()
         setupObservers()
     }
@@ -59,37 +60,33 @@ class HomeFragment : Fragment() {
         super.onDestroyView()
     }
 
+    private fun setupToolbar() {
+        binding.customToolbar.onRateClick = {
+            findNavController().navigate(R.id.action_homeFragment_to_rateFragment)
+        }
+        binding.customToolbar.onAudioToggleClick = {
+            challengeViewModel.toggleAudio()
+        }
+        binding.customToolbar.onInstructionsClick = {
+            findNavController().navigate(R.id.action_homeFragment_to_instructionsFragment)
+        }
+        binding.customToolbar.onChallengesClick = {
+            findNavController().navigate(R.id.action_homeFragment_to_challengeListFragment)
+        }
+        binding.customToolbar.onShareClick = {
+            findNavController().navigate(R.id.action_homeFragment_to_shareFragment)
+        }
+    }
+
     private fun setupControllers() {
-        binding.btnInstructions.setOnClickListener {
-            applyTouchAnimation(it) {
-                findNavController().navigate(R.id.action_homeFragment_to_instructionsFragment)
-            }
-        }
-
-        binding.btnChallenges.setOnClickListener {
-            applyTouchAnimation(it) {
-                findNavController().navigate(R.id.action_homeFragment_to_challengeListFragment)
-            }
-        }
-
-        binding.btnAudioToggle.setOnClickListener {
-            applyTouchAnimation(it) { challengeViewModel.toggleAudio() }
-        }
-
-        binding.btnRate.setOnClickListener {
-            applyTouchAnimation(it) { /* HU 4.0 */ }
-        }
-
-        binding.btnShare.setOnClickListener {
-            applyTouchAnimation(it) { /* HU 10.0 */ }
-        }
-
         binding.btnSpinCircle.setOnClickListener {
             applyTouchAnimation(it) { challengeViewModel.spinBottle() }
         }
     }
 
     private fun setupObservers() {
+        binding.imgBottle.rotation = challengeViewModel.bottleRotation.value ?: 0f
+
         challengeViewModel.countdown.observe(viewLifecycleOwner) { count ->
             binding.txtCountdown.text = count?.toString() ?: ""
             binding.txtCountdown.contentDescription = if (count != null) {
@@ -100,15 +97,19 @@ class HomeFragment : Fragment() {
         }
 
         challengeViewModel.bottleRotation.observe(viewLifecycleOwner) { degrees ->
-            binding.imgBottle.animate()
-                .rotation(degrees)
-                .setDuration(4000)
-                .start()
+            if (challengeViewModel.isSpinning.value == true) {
+                binding.imgBottle.animate()
+                    .rotation(degrees)
+                    .setDuration(4000)
+                    .start()
+            } else {
+                binding.imgBottle.animate().cancel()
+                binding.imgBottle.rotation = degrees
+            }
         }
 
         challengeViewModel.isAudioOn.observe(viewLifecycleOwner) { isOn ->
-            val icon = if (isOn) R.drawable.ic_audio_on else R.drawable.ic_audio_off
-            binding.btnAudioToggle.setImageResource(icon)
+            binding.customToolbar.setAudioOn(isOn)
             syncBackgroundAudio(isOn)
         }
 

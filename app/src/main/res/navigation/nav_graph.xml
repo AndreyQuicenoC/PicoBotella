@@ -23,12 +23,24 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_home">
         <action
+            android:id="@+id/action_homeFragment_to_rateFragment"
+            app:destination="@id/rateFragment" />
+        <action
             android:id="@+id/action_homeFragment_to_instructionsFragment"
             app:destination="@id/instructionsFragment" />
         <action
             android:id="@+id/action_homeFragment_to_challengeListFragment"
             app:destination="@id/challengeListFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_shareFragment"
+            app:destination="@id/shareFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/rateFragment"
+        android:name="com.example.picobotella.view.fragment.RateFragment"
+        android:label="fragment_rate"
+        tools:layout="@layout/fragment_rate" />
 
     <fragment
         android:id="@+id/instructionsFragment"
@@ -41,5 +53,11 @@
         android:name="com.example.picobotella.view.fragment.ChallengeListFragment"
         android:label="fragment_challenge_list"
         tools:layout="@layout/fragment_challenge_list" />
+
+    <fragment
+        android:id="@+id/shareFragment"
+        android:name="com.example.picobotella.view.fragment.ShareFragment"
+        android:label="fragment_share"
+        tools:layout="@layout/fragment_share" />
 
 </navigation>

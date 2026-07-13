@@ -3,11 +3,17 @@
     <string name="app_name">Pico Botella</string>
     <string name="splash_title">pico botella</string>
     <string name="home_under_construction">Home en construcción</string>
+    <string name="rate_under_construction">Calificar en construcción</string>
+    <string name="instructions_under_construction">Instrucciones en construcción</string>
+    <string name="challenges_under_construction">Retos en construcción</string>
+    <string name="share_under_construction">Compartir en construcción</string>
 
     <string name="presioname_label">Presióname</string>
 
     <string name="desc_rate">Calificar aplicación</string>
     <string name="desc_audio">Alternar sonido de fondo</string>
+    <string name="desc_audio_on">Sonido de fondo encendido</string>
+    <string name="desc_audio_off">Sonido de fondo apagado</string>
     <string name="desc_instructions">Ver instrucciones del juego</string>
     <string name="desc_challenges">Gestionar retos de la base de datos</string>
     <string name="desc_share">Compartir aplicación con amigos</string>
