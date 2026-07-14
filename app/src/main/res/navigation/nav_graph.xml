@@ -52,12 +52,32 @@
         android:id="@+id/challengeListFragment"
         android:name="com.example.picobotella.view.fragment.ChallengeListFragment"
         android:label="fragment_challenge_list"
-        tools:layout="@layout/fragment_challenge_list" />
+        tools:layout="@layout/fragment_challenge_list">
+        <!-- Acción para navegar al diálogo de edición desde la lista de retos -->
+        <action
+            android:id="@+id/action_challengeListFragment_to_editChallengeDialog"
+            app:destination="@id/editChallengeDialog" />
+    </fragment>
 
     <fragment
         android:id="@+id/shareFragment"
         android:name="com.example.picobotella.view.fragment.ShareFragment"
         android:label="fragment_share"
         tools:layout="@layout/fragment_share" />
+
+    <!-- HU 8.0: Diálogo de Edición agregado al grafo de navegación -->
+    <dialog
+        android:id="@+id/editChallengeDialog"
+        android:name="com.example.picobotella.view.fragment.EditChallengeDialog"
+        android:label="dialog_edit_challenge"
+        tools:layout="@layout/dialog_edit_challenge">
+        <!-- Argumentos requeridos por el diálogo para mantener el patrón seguro sin serializar -->
+        <argument
+            android:name="arg_challenge_id"
+            app:argType="integer" />
+        <argument
+            android:name="arg_challenge_desc"
+            app:argType="string" />
+    </dialog>
 
 </navigation>
