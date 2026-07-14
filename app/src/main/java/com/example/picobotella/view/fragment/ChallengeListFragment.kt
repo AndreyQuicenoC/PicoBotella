@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.picobotella.databinding.FragmentChallengeListBinding
 import com.example.picobotella.view.adapter.ChallengeAdapter
 import com.example.picobotella.viewmodel.ChallengeViewModel
@@ -32,10 +33,7 @@ class ChallengeListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         
-        // Guardamos el estado inicial del audio
         wasAudioOnInitially = challengeViewModel.isAudioOn.value ?: true
-        
-        // Si el audio está encendido, lo pausamos al entrar
         if (wasAudioOnInitially) {
             challengeViewModel.setAudioState(false)
         }
@@ -45,32 +43,39 @@ class ChallengeListFragment : Fragment() {
         setupFAB()
         setupObservers()
         
-        // Cargar la lista inicialmente
         challengeViewModel.getListChallenge()
     }
 
     private fun setupToolbar() {
-        // Lógica del botón Volver (flecha naranja) de develop
         binding.btnBack.setOnClickListener {
-            // Si el audio estaba encendido, lo reactivamos al salir
             if (wasAudioOnInitially) {
                 challengeViewModel.setAudioState(true)
             }
-            // Regresamos al Home
             findNavController().navigateUp()
         }
     }
 
     private fun setupRecyclerView() {
         challengeAdapter = ChallengeAdapter(
-            challenges = emptyList()
+            challenges = emptyList(),
+            onEditClick = { challenge ->
+                // HU 8.0 logic
+            },
+            onDeleteClick = { challenge ->
+                // HU 9.0 logic
+            }
         )
-        binding.recyclerViewChallenges.adapter = challengeAdapter
+        
+        binding.recyclerViewChallenges.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = challengeAdapter
+        }
     }
 
     private fun setupFAB() {
         binding.fabAddChallenge.setOnClickListener {
-            AddChallengeDialog.newInstance().show(childFragmentManager, AddChallengeDialog.TAG)
+            val dialog = AddChallengeDialog()
+            dialog.show(parentFragmentManager, "AddChallengeDialog")
         }
     }
 
