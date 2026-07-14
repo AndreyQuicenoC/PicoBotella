@@ -9,8 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/bg_wood_floor"
-        android:clipChildren="false"
-        android:clipToPadding="false"
         tools:context=".view.fragment.HomeFragment">
 
         <com.example.picobotella.view.component.CustomToolbar
@@ -32,8 +30,6 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="16dp"
-            android:clipChildren="false"
-            android:clipToPadding="false"
             app:layout_constraintBottom_toTopOf="@+id/btnSpinCircle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
