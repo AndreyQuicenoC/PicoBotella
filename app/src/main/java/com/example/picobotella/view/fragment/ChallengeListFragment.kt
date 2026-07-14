@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.picobotella.databinding.FragmentChallengeListBinding
+import com.example.picobotella.view.adapter.ChallengeAdapter
 import com.example.picobotella.viewmodel.ChallengeViewModel
 
 class ChallengeListFragment : Fragment() {
@@ -17,6 +19,7 @@ class ChallengeListFragment : Fragment() {
 
     private val challengeViewModel: ChallengeViewModel by activityViewModels()
     private var wasAudioOnInitially = true
+    private lateinit var challengeAdapter: ChallengeAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,29 +33,47 @@ class ChallengeListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Guardamos el estado inicial del audio
         wasAudioOnInitially = challengeViewModel.isAudioOn.value ?: true
-        
-        // Si el audio está encendido, lo pausamos al entrar
         if (wasAudioOnInitially) {
             challengeViewModel.setAudioState(false)
         }
 
-        // Lógica del botón Volver (flecha naranja)
         binding.btnBack.setOnClickListener {
-            // Si el audio estaba encendido, lo reactivamos al salir
             if (wasAudioOnInitially) {
                 challengeViewModel.setAudioState(true)
             }
-            // Regresamos al Home
             findNavController().navigateUp()
+        }
+
+        // HU 7.0: Abrir diálogo para agregar
+        binding.fabAddChallenge.setOnClickListener {
+            val dialog = AddChallengeDialog()
+            dialog.show(parentFragmentManager, "AddChallengeDialog")
         }
 
         setupRecyclerView()
     }
 
     private fun setupRecyclerView() {
-        // Placeholder para la configuración del Adapter
+        // Inicializamos el adaptador con lambdas vacías para editar/eliminar (HU 8 y 9)
+        challengeAdapter = ChallengeAdapter(
+            challenges = emptyList(),
+            onEditClick = { /* HU 8.0: Pendiente implementar diálogo de edición */ },
+            onDeleteClick = { /* HU 9.0: Pendiente implementar diálogo de eliminación */ }
+        )
+
+        binding.recyclerViewChallenges.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = challengeAdapter
+        }
+
+        // Observamos el LiveData. Cuando se inserte un reto en HU 7.0, esto se disparará automáticamente.
+        challengeViewModel.listChallenge.observe(viewLifecycleOwner) { challenges ->
+            challengeAdapter.updateList(challenges)
+        }
+
+        // Carga inicial de datos
+        challengeViewModel.getListChallenge()
     }
 
     override fun onDestroyView() {

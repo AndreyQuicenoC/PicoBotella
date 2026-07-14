@@ -12,6 +12,13 @@
     <string name="title_challenges">Retos</string>
     <string name="btn_back">Volver</string>
 
+    <string name="title_add_challenge">Agregar reto</string>
+    <string name="title_edit_challenge">Editar reto</string>
+    <string name="hint_write_challenge">Escriba el reto</string>
+    <string name="hint_edit_challenge">Edite el reto</string>
+    <string name="btn_cancel">Cancelar</string>
+    <string name="btn_save">Guardar</string>
+
     <string name="desc_rate">Calificar aplicación</string>
     <string name="desc_audio">Alternar sonido de fondo</string>
     <string name="desc_audio_on">Sonido de fondo encendido</string>
