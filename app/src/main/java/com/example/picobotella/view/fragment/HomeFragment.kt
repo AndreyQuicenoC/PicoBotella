@@ -125,13 +125,6 @@ class HomeFragment : Fragment() {
                 setupBlinkAnimation()
             }
         }
-
-        challengeViewModel.randomChallengeResult.observe(viewLifecycleOwner) { result ->
-            if (result != null) {
-                val dialog = RandomChallengeDialog.newInstance()
-                dialog.show(childFragmentManager, RandomChallengeDialog.TAG)
-            }
-        }
     }
 
     private fun syncBackgroundAudio(isOn: Boolean) {
