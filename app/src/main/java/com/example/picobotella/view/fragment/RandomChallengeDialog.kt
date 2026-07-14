@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.example.picobotella.databinding.DialogRandomChallengeBinding
@@ -38,6 +39,16 @@ class RandomChallengeDialog : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         setupObservers()
         setupListeners()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val screenWidth = resources.displayMetrics.widthPixels
+        dialog?.window?.apply {
+            setLayout((screenWidth * 0.90f).toInt(), WindowManager.LayoutParams.WRAP_CONTENT)
+            setDimAmount(0.65f)
+            addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+        }
     }
 
     private fun setupObservers() {

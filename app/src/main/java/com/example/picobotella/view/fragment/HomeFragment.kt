@@ -131,7 +131,7 @@ class HomeFragment : Fragment() {
             if (challengeViewModel.isSpinning.value == true) {
                 binding.imgBottle.animate()
                     .rotation(degrees)
-                    .setDuration(4000)
+                    .setDuration(ChallengeViewModel.SPIN_DURATION_MS)
                     .start()
 
             } else {

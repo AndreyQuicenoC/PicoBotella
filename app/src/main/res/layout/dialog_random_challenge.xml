@@ -5,19 +5,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="32dp"
     android:background="@drawable/bg_dialog_random"
-    android:padding="24dp">
+    android:paddingStart="20dp"
+    android:paddingTop="24dp"
+    android:paddingEnd="20dp"
+    android:paddingBottom="20dp">
 
     <!-- Imagen circular del Pokémon -->
     <ImageView
         android:id="@+id/ivPokemon"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:layout_marginBottom="20dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:scaleType="centerCrop"
         android:background="@drawable/bg_circle_button"
-        android:contentDescription="@string/desc_bottle"
+        android:contentDescription="@string/desc_random_pokemon"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -27,16 +28,16 @@
         android:id="@+id/cardChallenge"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="20dp"
         app:cardCornerRadius="20dp"
-        app:cardElevation="10dp"
+        app:cardElevation="0dp"
         app:layout_constraintTop_toBottomOf="@id/ivPokemon"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
             android:orientation="vertical"
-            android:padding="24dp"
+            android:padding="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center">
@@ -45,22 +46,24 @@
                 android:id="@+id/tvChallengeText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
+                android:gravity="center"
+                android:minHeight="96dp"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="12dp"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:gravity="center"
                 tools:text="reto apoteósico"/>
 
             <Button
                 android:id="@+id/btnClose"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:padding="12dp"
+                android:layout_width="160dp"
+                android:layout_height="52dp"
+                android:layout_marginTop="16dp"
                 android:text="@string/close"
                 android:textColor="@color/white"
-                android:textSize="18sp"
+                android:textSize="16sp"
+                android:textStyle="bold"
                 android:backgroundTint="@color/orange_primary"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
