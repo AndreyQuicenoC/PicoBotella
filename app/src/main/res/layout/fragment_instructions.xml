@@ -77,6 +77,22 @@
                     android:textSize="14sp"
                     android:layout_marginBottom="32dp" />
 
+                <!-- Botón de lectura en voz alta -->
+                <Button
+                    android:id="@+id/btnSpeakInstructions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="24dp"
+                    android:backgroundTint="#FF5722"
+                    android:text="Leer en voz alta instrucciones"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"
+                    android:drawableStart="@drawable/ic_audio_off"
+                    android:drawablePadding="8dp"
+                    android:drawableTint="@android:color/white"
+                    android:enabled="false" />
+
                 <!-- Animación de Triunfo (Criterio 8) -->
                 <com.airbnb.lottie.LottieAnimationView
                     android:id="@+id/animationVictory"
