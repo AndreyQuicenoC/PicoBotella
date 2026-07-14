@@ -1,11 +1,14 @@
 package com.example.picobotella.view.fragment
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -43,7 +46,6 @@ class HomeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        // Si la app vuelve a primer plano, sincroniza con el estado global del ViewModel
         if (challengeViewModel.isAudioOn.value == true) {
             backgroundAudioManager?.start()
         } else {
@@ -52,7 +54,6 @@ class HomeFragment : Fragment() {
     }
 
     override fun onPause() {
-        // Si el usuario minimiza la app por completo o sale al sistema operativo, paramos el audio de fondo
         backgroundAudioManager?.pause()
         super.onPause()
     }
@@ -66,7 +67,7 @@ class HomeFragment : Fragment() {
 
     private fun setupToolbar() {
         binding.customToolbar.onRateClick = {
-            findNavController().navigate(R.id.action_homeFragment_to_rateFragment)
+            openPlayStore()
         }
         binding.customToolbar.onAudioToggleClick = {
             challengeViewModel.toggleAudio()
@@ -79,6 +80,20 @@ class HomeFragment : Fragment() {
         }
         binding.customToolbar.onShareClick = {
             findNavController().navigate(R.id.action_homeFragment_to_shareFragment)
+        }
+    }
+
+    private fun openPlayStore() {
+        val playStoreUrl = "https://play.google.com/store/apps/details?id=com.nequi.MobileApp&hl=es_419&gl=es"
+        try {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(playStoreUrl))
+            startActivity(intent)
+        } catch (e: Exception) {
+            Toast.makeText(
+                requireContext(),
+                "No se pudo abrir la tienda de aplicaciones",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
