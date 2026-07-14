@@ -21,7 +21,4 @@ interface ChallengeDao {
 
     @Delete
     suspend fun deleteChallenge(challenge: Challenge)
-
-    @Update
-    suspend fun updateChallenge(challenge: Challenge)
 }

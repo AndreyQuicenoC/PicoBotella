@@ -6,6 +6,6 @@ data class PokemonResult(
     @SerializedName("name")
     val name: String,
 
-    @SerializedName("url")
-    val url: String
+    @SerializedName("img")
+    val img: String
 )

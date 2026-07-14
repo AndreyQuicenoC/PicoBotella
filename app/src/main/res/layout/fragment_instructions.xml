@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://tools.android.com/ Carb">
+    xmlns:tools="http://schemas.android.com/tools">
     <!-- HU 5.0: Instrucciones del juego -->
 
     <!-- Fondo Gris #333333 (Criterio 2) -->
@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="#333333"
-        tools:context=".view.RulesFragment">
+        tools:context=".view.fragment.InstructionsFragment">
 
         <!-- Toolbar Personalizada (Criterio 3) -->
         <androidx.appcompat.widget.Toolbar
@@ -77,6 +77,22 @@
                     android:textSize="14sp"
                     android:layout_marginBottom="32dp" />
 
+                <!-- Botón de lectura en voz alta -->
+                <Button
+                    android:id="@+id/btnSpeakInstructions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="24dp"
+                    android:backgroundTint="#FF5722"
+                    android:text="Leer en voz alta instrucciones"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"
+                    android:drawableStart="@drawable/ic_audio_off"
+                    android:drawablePadding="8dp"
+                    android:drawableTint="@android:color/white"
+                    android:enabled="false" />
+
                 <!-- Animación de Triunfo (Criterio 8) -->
                 <com.airbnb.lottie.LottieAnimationView
                     android:id="@+id/animationVictory"
@@ -86,7 +102,7 @@
                     app:lottie_rawRes="@raw/anim_victory"
                     app:lottie_autoPlay="true"
                     app:lottie_loop="true"
-                    tools:src="@drawable/img_victory_placeholder" />
+                    tools:src="@drawable/ic_star" />
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
