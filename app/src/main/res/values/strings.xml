@@ -8,6 +8,18 @@
     <string name="challenges_under_construction">Retos en construcción</string>
     <string name="share_under_construction">Compartir en construcción</string>
 
+    <string name="add_challenge">Agregar nuevo reto</string>
+    <string name="save">Guardar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="hint_challenge_description">Escribe el reto aquí...</string>
+    <string name="error_empty_challenge">La descripción no puede estar vacía</string>
+    <string name="edit_challenge">Editar reto</string>
+    <string name="delete_challenge">Eliminar reto</string>
+    <string name="confirm_delete_title">Confirmar eliminación</string>
+    <string name="confirm_delete_message">¿Estás seguro de que deseas eliminar este reto?</string>
+    <string name="delete">Eliminar</string>
+    <string name="list_challenges_title">Retos</string>
+
     <string name="presioname_label">Presióname</string>
 
     <string name="desc_rate">Calificar aplicación</string>
@@ -26,4 +38,5 @@
     <string name="rules_desc_how_to_play">Los jugadores forman un círculo y en el centro colocan el dispositivo móvil, luego tocan el botón parpadeante para girar la botella. \nEl jugador que señale la botella debe cumplir el reto que lanza la app, de lo contrario abandona el juego.</string>
     <string name="rules_title_who_wins">¿Quién gana?</string>
     <string name="rules_desc_who_wins">Gana el último jugador que no abandone el juego.</string>
+    <string name="close">Cerrar</string>
 </resources>
