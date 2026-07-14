@@ -31,12 +31,6 @@ class ChallengeRepository(val context: Context) {
         }
     }
 
-    suspend fun deleteChallenge(challenge: Challenge) {
-        withContext(Dispatchers.IO) {
-            challengeDao.deleteChallenge(challenge)
-        }
-    }
-
     // ==========================================
     // OPERACIONES DE LA API REMOTA (RETROFIT)
     // ==========================================

@@ -8,6 +8,7 @@ import com.example.picobotella.model.Challenge
 
 class ChallengeAdapter(
     private var challenges: List<Challenge>,
+    private val onEditClick: (Challenge) -> Unit,
     private val onDeleteClick: (Challenge) -> Unit
 ) : RecyclerView.Adapter<ChallengeAdapter.ChallengeViewHolder>() {
 
@@ -16,13 +17,15 @@ class ChallengeAdapter(
 
         fun bind(challenge: Challenge) {
             binding.txtDescription.text = challenge.description
-            binding.btnDeleteChallenge.setOnClickListener {
-                onDeleteClick(challenge)
-            }
+            
+            // HU 8.0 y 9.0: Mantener funcionalidad de clics para edición y eliminación
+            binding.btnEditChallenge.setOnClickListener { onEditClick(challenge) }
+            binding.btnDeleteChallenge.setOnClickListener { onDeleteClick(challenge) }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChallengeViewHolder {
+        // Adoptamos la inflación con DataBinding proveniente de 'develop'
         val binding = ItemChallengeBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
@@ -38,7 +41,7 @@ class ChallengeAdapter(
     override fun getItemCount(): Int = challenges.size
 
     fun updateList(newList: List<Challenge>) {
-        challenges = newList
+        this.challenges = newList
         notifyDataSetChanged()
     }
 }
