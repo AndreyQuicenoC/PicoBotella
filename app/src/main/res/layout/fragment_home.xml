@@ -61,7 +61,7 @@
 
         </FrameLayout>
 
-        <View
+        <ImageButton
             android:id="@+id/btnSpinCircle"
             android:layout_width="72dp"
             android:layout_height="72dp"

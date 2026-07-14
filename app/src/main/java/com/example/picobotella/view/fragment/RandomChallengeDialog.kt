@@ -6,11 +6,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.example.picobotella.databinding.DialogRandomChallengeBinding
 import com.example.picobotella.R
 import com.example.picobotella.viewmodel.ChallengeViewModel
+import com.bumptech.glide.Glide
 
 class RandomChallengeDialog : DialogFragment() {
 
@@ -39,20 +41,49 @@ class RandomChallengeDialog : DialogFragment() {
         setupListeners()
     }
 
+    override fun onStart() {
+        super.onStart()
+        val screenWidth = resources.displayMetrics.widthPixels
+        dialog?.window?.apply {
+            setLayout((screenWidth * 0.90f).toInt(), WindowManager.LayoutParams.WRAP_CONTENT)
+            setDimAmount(0.65f)
+            addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+        }
+    }
+
     private fun setupObservers() {
         challengeViewModel.randomChallengeResult.observe(viewLifecycleOwner) { result ->
-            result?.let { (challenge, _) ->
-                // Mostramos únicamente el texto del reto obtenido de la DB local
+            result?.let { (challenge, pokemon) ->
+                // Mostrar el reto
                 binding.tvChallengeText.text = challenge.description
+
+                // Mostrar la imagen del Pokémon
+                if (pokemon.img.isNotEmpty()) {
+                    Glide.with(this)
+                        .load(pokemon.img)
+                        .into(binding.ivPokemon)
+                }
             }
         }
+
     }
 
     private fun setupListeners() {
         binding.btnClose.setOnClickListener {
             challengeViewModel.resetGameState()
             dismiss()
+            // Aquí vuelves a mostrar el botón del HomeFragment
+            (requireActivity()
+                .supportFragmentManager
+                .findFragmentById(R.id.nav_host_fragment)
+                ?.childFragmentManager
+                ?.fragments
+                ?.find { it is HomeFragment } as? HomeFragment
+                    )?.let { home ->
+                    home.showSpinButton()
+                }
         }
+
     }
 
     override fun onDestroyView() {

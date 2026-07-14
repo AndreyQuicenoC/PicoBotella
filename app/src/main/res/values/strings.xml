@@ -59,6 +59,7 @@
     <string name="rules_title_who_wins">¿Quién gana?</string>
     <string name="rules_desc_who_wins">Gana el último jugador que no abandone el juego.</string>
     <string name="close">Cerrar</string>
+    <string name="desc_random_pokemon">Pokémon elegido para el reto</string>
     <string name="share_title">App pico botella</string>
     <string name="share_slogan">Solo los valientes lo juegan !!</string>
     <string name="share_download_url">https://play.google.com/store/apps/details?id=com.nequi.MobileApp&amp;hl=es_419&amp;gl=es</string>

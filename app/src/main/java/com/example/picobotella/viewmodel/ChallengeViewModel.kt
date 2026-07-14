@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.picobotella.model.Challenge
 import com.example.picobotella.model.PokemonResult
 import com.example.picobotella.repository.ChallengeRepository
+import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.random.Random
@@ -92,6 +93,7 @@ class ChallengeViewModel(application: Application) : AndroidViewModel(applicatio
             try {
                 _isSpinning.value = true
                 _countdown.value = null
+                val challengeResult = async { loadRandomChallengeAndPokemon() }
 
                 val minTurns = 4
                 val maxTurns = 8
@@ -101,15 +103,16 @@ class ChallengeViewModel(application: Application) : AndroidViewModel(applicatio
                 currentDegrees += randomDegrees
                 _bottleRotation.value = currentDegrees
 
-                delay(4000)
+                delay(SPIN_DURATION_MS)
 
                 for (i in 3 downTo 0) {
                     _countdown.value = i
-                    delay(1000)
+                    // 3, 2 y 1 duran un segundo cada uno; el 0 se muestra
+                    // brevemente y el reto aparece sin una espera adicional.
+                    delay(if (i == 0) 100 else 1000)
                 }
 
-                delay(400)
-                fetchRandomChallengeAndPokemon()
+                _randomChallengeResult.value = challengeResult.await()
             } finally {
                 finishSpinRound()
             }
@@ -121,34 +124,27 @@ class ChallengeViewModel(application: Application) : AndroidViewModel(applicatio
         _isSpinning.value = false
     }
 
-    // Lógica para obtener reto aleatorio (Pokémon pospuesto para futura HU)
-    fun fetchRandomChallengeAndPokemon() {
-        viewModelScope.launch {
-            try {
-                // 1. Obtener reto aleatorio de Room
-                val localChallenges = repository.getListChallenge()
-                val randomChallenge = if (localChallenges.isNotEmpty()) {
-                    localChallenges[Random.nextInt(localChallenges.size)]
-                } else {
-                    Challenge(id = 0, description = "¡Reto por defecto! Baila por 1 minuto.")
-                }
-
-                // TODO: Integrar API de Pokémon en esta sección.
-                // Por ahora se envía un objeto vacío para cumplir con la firma del Pair
-                val placeholderPokemon = PokemonResult("", "")
-
-                // 3. Emitir el resultado (Solo el reto es funcional actualmente)
-                _randomChallengeResult.value = Pair(randomChallenge, placeholderPokemon)
-            } catch (e: Exception) {
-                e.printStackTrace()
-                _randomChallengeResult.value = null
-            }
+    private suspend fun loadRandomChallengeAndPokemon(): Pair<Challenge, PokemonResult> {
+        val localChallenges = repository.getListChallenge()
+        val randomChallenge = if (localChallenges.isNotEmpty()) {
+            localChallenges[Random.nextInt(localChallenges.size)]
+        } else {
+            Challenge(id = 0, description = "¡Reto por defecto! Baila por 1 minuto.")
         }
+
+        val pokemonImageUrl = repository.getPokemonFromApi().orEmpty()
+        val pokemonResult = PokemonResult(name = "Pokémon", img = pokemonImageUrl)
+
+        return Pair(randomChallenge, pokemonResult)
     }
 
     fun resetGameState() {
         _isSpinning.value = false
         _countdown.value = null
         _randomChallengeResult.value = null
+    }
+
+    companion object {
+        const val SPIN_DURATION_MS = 3000L
     }
 }
