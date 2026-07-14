@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.picobotella.databinding.FragmentChallengeListBinding
 import com.example.picobotella.view.adapter.ChallengeAdapter
 import com.example.picobotella.viewmodel.ChallengeViewModel
+import com.example.picobotella.model.Challenge
 
 class ChallengeListFragment : Fragment() {
 
@@ -62,7 +63,7 @@ class ChallengeListFragment : Fragment() {
                 // HU 8.0 logic
             },
             onDeleteClick = { challenge ->
-                // HU 9.0 logic
+                showDeleteDialog(challenge)
             }
         )
         
@@ -70,6 +71,11 @@ class ChallengeListFragment : Fragment() {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = challengeAdapter
         }
+    }
+
+    private fun showDeleteDialog(challenge: Challenge) {
+        val dialog = DeleteChallengeDialog.newInstance(challenge)
+        dialog.show(childFragmentManager, DeleteChallengeDialog.TAG)
     }
 
     private fun setupFAB() {
