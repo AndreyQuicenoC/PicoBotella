@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.picobotella.databinding.FragmentChallengeListBinding
+import com.example.picobotella.view.adapter.ChallengeAdapter
 import com.example.picobotella.viewmodel.ChallengeViewModel
 
 class ChallengeListFragment : Fragment() {
@@ -16,6 +17,7 @@ class ChallengeListFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val challengeViewModel: ChallengeViewModel by activityViewModels()
+    private lateinit var challengeAdapter: ChallengeAdapter
     private var wasAudioOnInitially = true
 
     override fun onCreateView(
@@ -29,7 +31,7 @@ class ChallengeListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        
         // Guardamos el estado inicial del audio
         wasAudioOnInitially = challengeViewModel.isAudioOn.value ?: true
         
@@ -38,7 +40,17 @@ class ChallengeListFragment : Fragment() {
             challengeViewModel.setAudioState(false)
         }
 
-        // Lógica del botón Volver (flecha naranja)
+        setupToolbar()
+        setupRecyclerView()
+        setupFAB()
+        setupObservers()
+        
+        // Cargar la lista inicialmente
+        challengeViewModel.getListChallenge()
+    }
+
+    private fun setupToolbar() {
+        // Lógica del botón Volver (flecha naranja) de develop
         binding.btnBack.setOnClickListener {
             // Si el audio estaba encendido, lo reactivamos al salir
             if (wasAudioOnInitially) {
@@ -47,12 +59,25 @@ class ChallengeListFragment : Fragment() {
             // Regresamos al Home
             findNavController().navigateUp()
         }
-
-        setupRecyclerView()
     }
 
     private fun setupRecyclerView() {
-        // Placeholder para la configuración del Adapter
+        challengeAdapter = ChallengeAdapter(
+            challenges = emptyList()
+        )
+        binding.recyclerViewChallenges.adapter = challengeAdapter
+    }
+
+    private fun setupFAB() {
+        binding.fabAddChallenge.setOnClickListener {
+            AddChallengeDialog.newInstance().show(childFragmentManager, AddChallengeDialog.TAG)
+        }
+    }
+
+    private fun setupObservers() {
+        challengeViewModel.listChallenge.observe(viewLifecycleOwner) { list ->
+            challengeAdapter.updateList(list)
+        }
     }
 
     override fun onDestroyView() {

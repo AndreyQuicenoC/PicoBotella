@@ -18,10 +18,4 @@ interface ChallengeDao {
     // para que el reto más nuevo siempre aparezca arriba en la lista.
     @Query("SELECT * FROM challenge_table ORDER BY id DESC")
     suspend fun getListChallenge(): MutableList<Challenge>
-
-    @Delete
-    suspend fun deleteChallenge(challenge: Challenge)
-
-    @Update
-    suspend fun updateChallenge(challenge: Challenge)
 }
