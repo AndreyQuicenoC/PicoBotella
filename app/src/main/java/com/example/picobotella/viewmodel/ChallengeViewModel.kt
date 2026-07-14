@@ -72,6 +72,12 @@ class ChallengeViewModel(application: Application) : AndroidViewModel(applicatio
         getListChallenge()
     }
 
+    fun deleteChallenge(challenge: Challenge) = viewModelScope.launch {
+        _progresState.value = true
+        repository.deleteChallenge(challenge)
+        getListChallenge()
+    }
+
     // --- LÓGICA DE GIRO (HU 11) ---
     fun spinBottle() {
         if (_isSpinning.value == true) return
