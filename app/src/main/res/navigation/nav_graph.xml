@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.example.picobotella.view.fragment.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash">
+        <action
+            android:id="@+id/action_splashFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.picobotella.view.fragment.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_rateFragment"
+            app:destination="@id/rateFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_instructionsFragment"
+            app:destination="@id/instructionsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_challengeListFragment"
+            app:destination="@id/challengeListFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_shareFragment"
+            app:destination="@id/shareFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/rateFragment"
+        android:name="com.example.picobotella.view.fragment.RateFragment"
+        android:label="fragment_rate"
+        tools:layout="@layout/fragment_rate" />
+
+    <fragment
+        android:id="@+id/instructionsFragment"
+        android:name="com.example.picobotella.view.fragment.InstructionsFragment"
+        android:label="fragment_instructions"
+        tools:layout="@layout/fragment_instructions" />
+
+    <fragment
+        android:id="@+id/challengeListFragment"
+        android:name="com.example.picobotella.view.fragment.ChallengeListFragment"
+        android:label="fragment_challenge_list"
+        tools:layout="@layout/fragment_challenge_list">
+        <!-- Acción para navegar al diálogo de edición desde la lista de retos -->
+        <action
+            android:id="@+id/action_challengeListFragment_to_editChallengeDialog"
+            app:destination="@id/editChallengeDialog" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/shareFragment"
+        android:name="com.example.picobotella.view.fragment.ShareFragment"
+        android:label="fragment_share"
+        tools:layout="@layout/fragment_share" />
+
+    <!-- HU 8.0: Diálogo de Edición agregado al grafo de navegación -->
+    <dialog
+        android:id="@+id/editChallengeDialog"
+        android:name="com.example.picobotella.view.fragment.EditChallengeDialog"
+        android:label="dialog_edit_challenge"
+        tools:layout="@layout/dialog_edit_challenge">
+        <!-- Argumentos requeridos por el diálogo para mantener el patrón seguro sin serializar -->
+        <argument
+            android:name="arg_challenge_id"
+            app:argType="integer" />
+        <argument
+            android:name="arg_challenge_desc"
+            app:argType="string" />
+    </dialog>
+
+</navigation>

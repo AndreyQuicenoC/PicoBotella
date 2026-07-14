@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_wood_floor"
+        android:clipChildren="true"
+        android:clipToPadding="true"
+        tools:context=".view.fragment.HomeFragment">
+
+        <com.example.picobotella.view.component.CustomToolbar
+            android:id="@+id/customToolbar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <FrameLayout
+            android:id="@+id/bottleContainer"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="16dp"
+            android:clipChildren="true"
+            android:clipToPadding="true"
+            app:layout_constraintBottom_toTopOf="@+id/btnSpinCircle"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/customToolbar">
+
+            <ImageView
+                android:id="@+id/imgBottle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:contentDescription="@string/desc_bottle"
+                android:padding="20dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_bottle" />
+
+            <TextView
+                android:id="@+id/txtCountdown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:importantForAccessibility="yes"
+                android:textColor="@color/orange_primary"
+                android:textSize="64sp"
+                android:textStyle="bold"
+                tools:text="3" />
+
+        </FrameLayout>
+
+        <ImageButton
+            android:id="@+id/btnSpinCircle"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/bg_circle_button"
+            android:clickable="true"
+            android:contentDescription="@string/presioname_label"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            app:layout_constraintBottom_toTopOf="@+id/txtPresionameTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/txtPresionameTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:text="@string/presioname_label"
+            android:textColor="@color/orange_primary"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

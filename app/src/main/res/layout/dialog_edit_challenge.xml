@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#FFFFFF"
+        android:padding="24dp"
+        tools:layout_width="320dp">
+
+        <!-- Título Superior (Criterio 2) -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/dialog_edit_title"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="20dp" />
+
+        <!-- Caja de Texto con línea Naranja (Criterio 3) -->
+        <!-- Se agrega android:hint para accesibilidad y solucionar el Warning -->
+        <EditText
+            android:id="@+id/etChallengeDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textLongMessage"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            android:backgroundTint="#FF5722"
+            android:hint="@string/dialog_edit_hint"
+            android:importantForAutofill="no"
+            tools:text="Crea un botón que al dar clic muestre una c" />
+
+        <!-- Contenedor Horizontal para Botones (Criterio 4 y 5) -->
+        <!-- Se agrega el estilo nativo de barra de botones para corregir la advertencia -->
+        <LinearLayout
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="24dp"
+            android:weightSum="2">
+
+            <!-- Botón Cancelar (Criterio 4) -->
+            <!-- Se aplica ?android:attr/buttonBarButtonStyle para remover bordes de barra -->
+            <Button
+                android:id="@+id/btnCancel"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.9"
+                android:text="@string/dialog_edit_btn_cancel"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textAllCaps="false"
+                android:backgroundTint="#FF5722"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:layout_marginEnd="8dp" />
+
+            <!-- Botón Guardar (Criterio 5) -->
+            <!-- Se aplica ?android:attr/buttonBarButtonStyle para consistencia visual -->
+            <Button
+                android:id="@+id/btnSave"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.9"
+                android:text="@string/dialog_edit_btn_save"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textAllCaps="false"
+                android:backgroundTint="#FF5722"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+    </LinearLayout>
+</layout>
