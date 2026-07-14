@@ -15,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.picobotella.R
 import com.example.picobotella.databinding.FragmentHomeBinding
 import com.example.picobotella.utils.BackgroundAudioManager
+import com.example.picobotella.utils.BottleSound
 import com.example.picobotella.viewmodel.ChallengeViewModel
 
 class HomeFragment : Fragment() {
@@ -24,6 +25,8 @@ class HomeFragment : Fragment() {
 
     private val challengeViewModel: ChallengeViewModel by activityViewModels()
     private var backgroundAudioManager: BackgroundAudioManager? = null
+
+    private var bottleAudio: BottleSound? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,6 +45,7 @@ class HomeFragment : Fragment() {
         setupToolbar()
         setupControllers()
         setupObservers()
+
     }
 
     override fun onResume() {
@@ -99,7 +103,8 @@ class HomeFragment : Fragment() {
 
     private fun setupControllers() {
         binding.btnSpinCircle.setOnClickListener {
-            applyTouchAnimation(it) { challengeViewModel.spinBottle() }
+            //applyTouchAnimation(it) { challengeViewModel.spinBottle() }
+            challengeViewModel.spinBottle()
         }
     }
 
@@ -121,9 +126,20 @@ class HomeFragment : Fragment() {
                     .rotation(degrees)
                     .setDuration(4000)
                     .start()
+
+                //if (bottleAudio == null) {
+                    //bottleAudio = BottleSound(requireContext())
+                //}
+                //bottleAudio?.start()
             } else {
+                //bottleAudio?.pause()
                 binding.imgBottle.animate().cancel()
                 binding.imgBottle.rotation = degrees
+
+
+                //bottleAudio?.pause()
+
+                //setupBlinkAnimation()
             }
         }
 
@@ -133,13 +149,32 @@ class HomeFragment : Fragment() {
         }
 
         challengeViewModel.isSpinning.observe(viewLifecycleOwner) { isSpinning ->
-            val visibility = if (isSpinning) View.INVISIBLE else View.VISIBLE
-            binding.btnSpinCircle.visibility = visibility
-            binding.txtPresionameTitle.visibility = visibility
-            if (!isSpinning) {
+
+            if (isSpinning) {
+
+                binding.btnSpinCircle.clearAnimation()
+                binding.txtPresionameTitle.clearAnimation()
+
+                binding.btnSpinCircle.visibility = View.GONE
+                binding.txtPresionameTitle.visibility = View.GONE
+
+
+                if (bottleAudio == null) {
+                    bottleAudio = BottleSound(requireContext())
+                }
+                bottleAudio?.start()
+
+            } else {
+
+                binding.btnSpinCircle.visibility = View.VISIBLE
+                binding.txtPresionameTitle.visibility = View.VISIBLE
+
+                bottleAudio?.pause()
+
                 setupBlinkAnimation()
             }
         }
+
 
         challengeViewModel.randomChallengeResult.observe(viewLifecycleOwner) { result ->
             if (result != null) {
