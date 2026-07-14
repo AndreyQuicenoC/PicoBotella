@@ -11,6 +11,7 @@ import androidx.fragment.app.activityViewModels
 import com.example.picobotella.databinding.DialogRandomChallengeBinding
 import com.example.picobotella.R
 import com.example.picobotella.viewmodel.ChallengeViewModel
+import com.bumptech.glide.Glide
 
 class RandomChallengeDialog : DialogFragment() {
 
@@ -41,18 +42,37 @@ class RandomChallengeDialog : DialogFragment() {
 
     private fun setupObservers() {
         challengeViewModel.randomChallengeResult.observe(viewLifecycleOwner) { result ->
-            result?.let { (challenge, _) ->
-                // Mostramos únicamente el texto del reto obtenido de la DB local
+            result?.let { (challenge, pokemon) ->
+                // Mostrar el reto
                 binding.tvChallengeText.text = challenge.description
+
+                // Mostrar la imagen del Pokémon
+                if (pokemon.img.isNotEmpty()) {
+                    Glide.with(this)
+                        .load(pokemon.img)
+                        .into(binding.ivPokemon)
+                }
             }
         }
+
     }
 
     private fun setupListeners() {
         binding.btnClose.setOnClickListener {
             challengeViewModel.resetGameState()
             dismiss()
+            // Aquí vuelves a mostrar el botón del HomeFragment
+            (requireActivity()
+                .supportFragmentManager
+                .findFragmentById(R.id.nav_host_fragment)
+                ?.childFragmentManager
+                ?.fragments
+                ?.find { it is HomeFragment } as? HomeFragment
+                    )?.let { home ->
+                    home.showSpinButton()
+                }
         }
+
     }
 
     override fun onDestroyView() {

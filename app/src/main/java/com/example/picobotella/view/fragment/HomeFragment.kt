@@ -101,6 +101,13 @@ class HomeFragment : Fragment() {
         }
     }
 
+    fun showSpinButton() {
+        binding.btnSpinCircle.visibility = View.VISIBLE
+        binding.txtPresionameTitle.visibility = View.VISIBLE
+        setupBlinkAnimation()
+    }
+
+
     private fun setupControllers() {
         binding.btnSpinCircle.setOnClickListener {
             //applyTouchAnimation(it) { challengeViewModel.spinBottle() }
@@ -127,19 +134,10 @@ class HomeFragment : Fragment() {
                     .setDuration(4000)
                     .start()
 
-                //if (bottleAudio == null) {
-                    //bottleAudio = BottleSound(requireContext())
-                //}
-                //bottleAudio?.start()
             } else {
-                //bottleAudio?.pause()
                 binding.imgBottle.animate().cancel()
                 binding.imgBottle.rotation = degrees
 
-
-                //bottleAudio?.pause()
-
-                //setupBlinkAnimation()
             }
         }
 
@@ -155,6 +153,10 @@ class HomeFragment : Fragment() {
                 binding.btnSpinCircle.clearAnimation()
                 binding.txtPresionameTitle.clearAnimation()
 
+                //binding.btnSpinCircle.visibility = View.VISIBLE
+                //binding.txtPresionameTitle.visibility = View.VISIBLE
+                //setupBlinkAnimation()
+
                 binding.btnSpinCircle.visibility = View.GONE
                 binding.txtPresionameTitle.visibility = View.GONE
 
@@ -165,16 +167,12 @@ class HomeFragment : Fragment() {
                 bottleAudio?.start()
 
             } else {
-
-                binding.btnSpinCircle.visibility = View.VISIBLE
-                binding.txtPresionameTitle.visibility = View.VISIBLE
-
+                //binding.btnSpinCircle.visibility = View.VISIBLE
+                //binding.txtPresionameTitle.visibility = View.VISIBLE
                 bottleAudio?.pause()
-
-                setupBlinkAnimation()
+                //setupBlinkAnimation()
             }
         }
-
 
         challengeViewModel.randomChallengeResult.observe(viewLifecycleOwner) { result ->
             if (result != null) {

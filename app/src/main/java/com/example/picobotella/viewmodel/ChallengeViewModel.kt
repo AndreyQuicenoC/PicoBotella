@@ -134,11 +134,18 @@ class ChallengeViewModel(application: Application) : AndroidViewModel(applicatio
                 }
 
                 // TODO: Integrar API de Pokémon en esta sección.
-                // Por ahora se envía un objeto vacío para cumplir con la firma del Pair
-                val placeholderPokemon = PokemonResult("", "")
+
+                //val placeholderPokemon = PokemonResult("", "")
+                val pokemonImageUrl = repository.getPokemonFromApi()
+
+                val pokemonResult = PokemonResult(
+                    name = "Pokemon",
+                    img = pokemonImageUrl ?: ""
+                )
 
                 // 3. Emitir el resultado (Solo el reto es funcional actualmente)
-                _randomChallengeResult.value = Pair(randomChallenge, placeholderPokemon)
+                _randomChallengeResult.value = Pair(randomChallenge, pokemonResult)
+
             } catch (e: Exception) {
                 e.printStackTrace()
                 _randomChallengeResult.value = null
