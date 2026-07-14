@@ -1,18 +1,18 @@
 package com.example.picobotella.utils
-import com.example.picobotella.webservice.ApiService
 import com.example.picobotella.webservice.ApiUtils
-import kotlin.random.Random
 
 class RandomPokemon {
 
+    private var cachedImageUrls: List<String>? = null
+
     suspend fun getRandomPokemonImage(): String? {
-        val response = ApiUtils.getApiService().getPokemonList()
-        val list = response.pokemon
-        if (list.isNotEmpty()) {
-            val randomIndex = Random.nextInt(list.size)
-            return list[randomIndex].img
-        }
-        return null
+        val imageUrls = cachedImageUrls ?: ApiUtils.getApiService()
+            .getPokemonList()
+            .pokemon
+            .mapNotNull { pokemon -> pokemon.img.takeIf(String::isNotBlank) }
+            .also { cachedImageUrls = it }
+
+        return imageUrls.randomOrNull()
     }
 
 }
