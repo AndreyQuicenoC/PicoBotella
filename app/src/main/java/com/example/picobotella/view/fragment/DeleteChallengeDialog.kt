@@ -54,11 +54,13 @@ class DeleteChallengeDialog : DialogFragment() {
         return binding.root
     }
 
+    override fun onStart() {
+        super.onStart()
+        dialog?.window?.setBackgroundDrawableResource(android.R.color.transparent)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        // Ajustar el fondo transparente de la ventana del diálogo para respetar esquinas y márgenes del XML
-        dialog?.window?.setBackgroundDrawableResource(android.R.color.transparent)
 
         // Mostrar descripción del reto
         binding.txtChallengeDescription.text = challengeDescription

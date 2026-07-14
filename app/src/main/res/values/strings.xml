@@ -17,6 +17,7 @@
     <string name="delete_challenge">Eliminar reto</string>
     <string name="confirm_delete_title">Confirmar eliminación</string>
     <string name="confirm_delete_message">¿Estás seguro de que deseas eliminar este reto?</string>
+    <string name="confirm_delete_challenge">¿Desea eliminar el siguiente reto?:</string>
     <string name="delete">Eliminar</string>
     <string name="list_challenges_title">Retos</string>
 

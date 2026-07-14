@@ -15,7 +15,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="¿Desea eliminar el siguiente reto?:"
+            android:text="@string/confirm_delete_challenge"
             android:textColor="@android:color/black"
             android:textSize="18sp"
             android:textStyle="bold"
