@@ -72,6 +72,12 @@ class ChallengeViewModel(application: Application) : AndroidViewModel(applicatio
         getListChallenge()
     }
 
+    fun updateChallenge(challenge: Challenge) = viewModelScope.launch {
+        _progresState.value = true
+        repository.saveChallenge(challenge) // Llama al repositorio para actualizar
+        getListChallenge() // Refresca la lista en pantalla automáticamente
+    }
+
     fun deleteChallenge(challenge: Challenge) = viewModelScope.launch {
         _progresState.value = true
         repository.deleteChallenge(challenge)

@@ -45,6 +45,14 @@
     <string name="desc_bottle">Botella de juego giratoria</string>
     <string name="desc_countdown">Cuenta regresiva: %1$d</string>
 
+    <!-- Strings para el diálogo de edición de retos -->
+    <string name="dialog_edit_title">Editar Reto</string>
+    <string name="dialog_edit_btn_cancel">Cancelar</string>
+    <string name="dialog_edit_btn_save">Guardar</string>
+    <string name="dialog_edit_error_empty">La descripción no puede estar vacía</string>
+    <string name="dialog_edit_hint">Modifica la descripción del reto</string>
+
+    <!-- Strings para la vista de instrucciones de juego -->
     <string name="rules_toolbar_title">Reglas del Juego</string>
     <string name="rules_title_how_to_play">¿Cómo se juega?</string>
     <string name="rules_desc_how_to_play">Los jugadores forman un círculo y en el centro colocan el dispositivo móvil, luego tocan el botón parpadeante para girar la botella. \nEl jugador que señale la botella debe cumplir el reto que lanza la app, de lo contrario abandona el juego.</string>

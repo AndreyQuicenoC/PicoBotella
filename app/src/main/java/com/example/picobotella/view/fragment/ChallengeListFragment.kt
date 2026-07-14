@@ -12,7 +12,7 @@ import com.example.picobotella.databinding.FragmentChallengeListBinding
 import com.example.picobotella.view.adapter.ChallengeAdapter
 import com.example.picobotella.viewmodel.ChallengeViewModel
 import com.example.picobotella.model.Challenge
-
+import com.example.picobotella.R
 class ChallengeListFragment : Fragment() {
 
     private var _binding: FragmentChallengeListBinding? = null
@@ -59,8 +59,18 @@ class ChallengeListFragment : Fragment() {
     private fun setupRecyclerView() {
         challengeAdapter = ChallengeAdapter(
             challenges = emptyList(),
-            onEditClick = { challenge ->
-                // HU 8.0 logic
+            onEditClick = { challengeSeleccionado ->
+                // HU 8.0 logic: Empaquetamos los datos del reto en el Bundle
+                val bundle = Bundle().apply {
+                    putInt("arg_challenge_id", challengeSeleccionado.id)
+                    putString("arg_challenge_desc", challengeSeleccionado.description)
+                }
+
+                // Navegamos al diálogo usando el Navigation Component
+                findNavController().navigate(
+                    R.id.action_challengeListFragment_to_editChallengeDialog,
+                    bundle
+                )
             },
             onDeleteClick = { challenge ->
                 showDeleteDialog(challenge)
