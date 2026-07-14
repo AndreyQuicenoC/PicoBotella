@@ -9,6 +9,8 @@
     <string name="share_under_construction">Compartir en construcción</string>
 
     <string name="presioname_label">Presióname</string>
+    <string name="title_challenges">Retos</string>
+    <string name="btn_back">Volver</string>
 
     <string name="desc_rate">Calificar aplicación</string>
     <string name="desc_audio">Alternar sonido de fondo</string>
@@ -17,6 +19,8 @@
     <string name="desc_instructions">Ver instrucciones del juego</string>
     <string name="desc_challenges">Gestionar retos de la base de datos</string>
     <string name="desc_share">Compartir aplicación con amigos</string>
+    <string name="desc_edit_challenge">Editar reto</string>
+    <string name="desc_delete_challenge">Eliminar reto</string>
 
     <string name="desc_bottle">Botella de juego giratoria</string>
     <string name="desc_countdown">Cuenta regresiva: %1$d</string>
