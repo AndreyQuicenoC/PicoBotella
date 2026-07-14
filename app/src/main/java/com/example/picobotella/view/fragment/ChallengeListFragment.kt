@@ -18,6 +18,7 @@ class ChallengeListFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val challengeViewModel: ChallengeViewModel by activityViewModels()
+    private lateinit var challengeAdapter: ChallengeAdapter
     private var wasAudioOnInitially = true
     private lateinit var challengeAdapter: ChallengeAdapter
 
@@ -32,18 +33,38 @@ class ChallengeListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+<<<<<<< HEAD
 
+=======
+        
+        // Guardamos el estado inicial del audio
+>>>>>>> develop
         wasAudioOnInitially = challengeViewModel.isAudioOn.value ?: true
         if (wasAudioOnInitially) {
             challengeViewModel.setAudioState(false)
         }
 
+<<<<<<< HEAD
+=======
+        setupToolbar()
+        setupRecyclerView()
+        setupFAB()
+        setupObservers()
+        
+        // Cargar la lista inicialmente
+        challengeViewModel.getListChallenge()
+    }
+
+    private fun setupToolbar() {
+        // Lógica del botón Volver (flecha naranja) de develop
+>>>>>>> develop
         binding.btnBack.setOnClickListener {
             if (wasAudioOnInitially) {
                 challengeViewModel.setAudioState(true)
             }
             findNavController().navigateUp()
         }
+<<<<<<< HEAD
 
         // HU 7.0: Abrir diálogo para agregar
         binding.fabAddChallenge.setOnClickListener {
@@ -74,6 +95,27 @@ class ChallengeListFragment : Fragment() {
 
         // Carga inicial de datos
         challengeViewModel.getListChallenge()
+=======
+    }
+
+    private fun setupRecyclerView() {
+        challengeAdapter = ChallengeAdapter(
+            challenges = emptyList()
+        )
+        binding.recyclerViewChallenges.adapter = challengeAdapter
+    }
+
+    private fun setupFAB() {
+        binding.fabAddChallenge.setOnClickListener {
+            AddChallengeDialog.newInstance().show(childFragmentManager, AddChallengeDialog.TAG)
+        }
+    }
+
+    private fun setupObservers() {
+        challengeViewModel.listChallenge.observe(viewLifecycleOwner) { list ->
+            challengeAdapter.updateList(list)
+        }
+>>>>>>> develop
     }
 
     override fun onDestroyView() {

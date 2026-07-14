@@ -15,11 +15,33 @@
         app:cardCornerRadius="6dp"
         app:cardElevation="4dp">
 
+<<<<<<< HEAD
         <androidx.constraintlayout.widget.ConstraintLayout
+=======
+        <!-- Parte Superior: Iconos -->
+        <ImageView
+            android:id="@+id/imgTypeIcon"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_info"
+            app:layout_constraintBottom_toTopOf="@id/challengeDivider"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="#FF5722" />
+
+        <!-- Divisor sutil -->
+        <View
+            android:id="@+id/challengeDivider"
+>>>>>>> develop
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="12dp">
 
+<<<<<<< HEAD
             <ImageView
                 android:id="@+id/imgTypeIcon"
                 android:layout_width="28dp"
@@ -87,3 +109,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </layout>
+=======
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
+>>>>>>> develop

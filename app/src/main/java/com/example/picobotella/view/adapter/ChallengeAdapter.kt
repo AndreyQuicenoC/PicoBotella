@@ -1,7 +1,6 @@
 package com.example.picobotella.view.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.picobotella.databinding.ItemChallengeBinding
@@ -13,34 +12,36 @@ class ChallengeAdapter(
     private val onDeleteClick: (Challenge) -> Unit
 ) : RecyclerView.Adapter<ChallengeAdapter.ChallengeViewHolder>() {
 
-    class ChallengeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        // Usamos bind() manual para evitar problemas de inicialización en el constructor
-        fun bind(
-            challenge: Challenge,
-            onEdit: (Challenge) -> Unit,
-            onDelete: (Challenge) -> Unit
-        ) {
-            val binding = ItemChallengeBinding.bind(itemView)
+    inner class ChallengeViewHolder(private val binding: ItemChallengeBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(challenge: Challenge) {
             binding.txtDescription.text = challenge.description
-            binding.btnEditChallenge.setOnClickListener { onEdit(challenge) }
-            binding.btnDeleteChallenge.setOnClickListener { onDelete(challenge) }
+            
+            // HU 8.0 y 9.0: Mantener funcionalidad de clics para edición y eliminación
+            binding.btnEditChallenge.setOnClickListener { onEditClick(challenge) }
+            binding.btnDeleteChallenge.setOnClickListener { onDeleteClick(challenge) }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChallengeViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(com.example.picobotella.R.layout.item_challenge, parent, false)
-        return ChallengeViewHolder(view)
+        // Adoptamos la inflación con DataBinding proveniente de 'develop'
+        val binding = ItemChallengeBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
+        return ChallengeViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ChallengeViewHolder, position: Int) {
-        holder.bind(challenges[position], onEditClick, onDeleteClick)
+        holder.bind(challenges[position])
     }
 
     override fun getItemCount(): Int = challenges.size
 
-    fun updateList(newChallenges: List<Challenge>) {
-        this.challenges = newChallenges
+    fun updateList(newList: List<Challenge>) {
+        this.challenges = newList
         notifyDataSetChanged()
     }
 }

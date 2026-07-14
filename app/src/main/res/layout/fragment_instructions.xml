@@ -85,7 +85,8 @@
                     android:layout_gravity="center_horizontal"
                     app:lottie_rawRes="@raw/anim_victory"
                     app:lottie_autoPlay="true"
-                    app:lottie_loop="true" />
+                    app:lottie_loop="true"
+                    tools:src="@drawable/ic_star" />
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
