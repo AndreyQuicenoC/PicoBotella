@@ -7,19 +7,14 @@ import com.example.picobotella.databinding.ItemChallengeBinding
 import com.example.picobotella.model.Challenge
 
 class ChallengeAdapter(
-    private var challenges: List<Challenge>,
-    private val onEditClick: (Challenge) -> Unit,
-    private val onDeleteClick: (Challenge) -> Unit
+    private var challenges: List<Challenge>
 ) : RecyclerView.Adapter<ChallengeAdapter.ChallengeViewHolder>() {
 
     inner class ChallengeViewHolder(private val binding: ItemChallengeBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(challenge: Challenge) {
-            binding.tvChallengeDescription.text = challenge.description
-            
-            binding.ibEdit.setOnClickListener { onEditClick(challenge) }
-            binding.ibDelete.setOnClickListener { onDeleteClick(challenge) }
+            binding.txtDescription.text = challenge.description
         }
     }
 

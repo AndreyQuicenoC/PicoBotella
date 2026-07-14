@@ -9,38 +9,17 @@
     android:background="@drawable/bg_dialog_random"
     android:padding="20dp">
 
-    <!-- Círculo superior para el Pokémon (Placeholder) -->
-    <FrameLayout
-        android:id="@+id/flPokemonContainer"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:background="@drawable/bg_circle_button"
-        android:backgroundTint="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/ivPokemonImage"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            android:contentDescription="@null"
-            android:src="@drawable/ic_bottle_splash"/>
-    </FrameLayout>
-
     <TextView
         android:id="@+id/tvChallengeText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:gravity="center"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/flPokemonContainer"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="¡Reto Aleatorio de la Base de Datos!" />
 
     <Button

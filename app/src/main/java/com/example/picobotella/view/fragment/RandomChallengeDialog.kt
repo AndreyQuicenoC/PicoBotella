@@ -42,12 +42,8 @@ class RandomChallengeDialog : DialogFragment() {
     private fun setupObservers() {
         challengeViewModel.randomChallengeResult.observe(viewLifecycleOwner) { result ->
             result?.let { (challenge, _) ->
-                // Mostramos el texto del reto obtenido de la DB local
+                // Mostramos únicamente el texto del reto obtenido de la DB local
                 binding.tvChallengeText.text = challenge.description
-                
-                // TODO: Integrar API de Pokémon.
-                // Por ahora mostramos únicamente el placeholder local
-                binding.ivPokemonImage.setImageResource(R.drawable.ic_bottle_splash)
             }
         }
     }

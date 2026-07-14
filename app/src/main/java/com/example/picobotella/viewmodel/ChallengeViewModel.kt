@@ -54,7 +54,7 @@ class ChallengeViewModel(application: Application) : AndroidViewModel(applicatio
         }
     }
 
-    // --- LÓGICA CRUD DE RETOS ALINEADA AL DOCENTE ---
+    // --- LÓGICA CRUD DE RETOS ---
     fun getListChallenge() {
         _progresState.value = true
         viewModelScope.launch {
@@ -69,18 +69,6 @@ class ChallengeViewModel(application: Application) : AndroidViewModel(applicatio
     fun insertChallenge(description: String) = viewModelScope.launch {
         _progresState.value = true
         repository.saveChallenge(Challenge(description = description))
-        getListChallenge() // Recarga la lista inmediatamente al estilo del profesor
-    }
-
-    fun updateChallenge(challenge: Challenge) = viewModelScope.launch {
-        _progresState.value = true
-        repository.updateChallenge(challenge)
-        getListChallenge()
-    }
-
-    fun deleteChallenge(challenge: Challenge) = viewModelScope.launch {
-        _progresState.value = true
-        repository.deleteChallenge(challenge)
         getListChallenge()
     }
 
