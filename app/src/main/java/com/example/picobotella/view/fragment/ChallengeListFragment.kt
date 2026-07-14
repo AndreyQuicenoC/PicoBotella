@@ -10,7 +10,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.picobotella.databinding.FragmentChallengeListBinding
 import com.example.picobotella.view.adapter.ChallengeAdapter
 import com.example.picobotella.viewmodel.ChallengeViewModel
-import com.example.picobotella.model.Challenge
 
 class ChallengeListFragment : Fragment() {
 
@@ -64,16 +63,9 @@ class ChallengeListFragment : Fragment() {
 
     private fun setupRecyclerView() {
         challengeAdapter = ChallengeAdapter(
-            challenges = emptyList(),
-            onDeleteClick = { challenge ->
-                showDeleteDialog(challenge)
-            }
+            challenges = emptyList()
         )
         binding.recyclerViewChallenges.adapter = challengeAdapter
-    }
-
-    private fun showDeleteDialog(challenge: Challenge) {
-        DeleteChallengeDialog.newInstance(challenge).show(childFragmentManager, DeleteChallengeDialog.TAG)
     }
 
     private fun setupFAB() {
