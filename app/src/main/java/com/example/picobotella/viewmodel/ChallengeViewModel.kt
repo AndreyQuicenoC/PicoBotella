@@ -109,6 +109,7 @@ class ChallengeViewModel(application: Application) : AndroidViewModel(applicatio
                 }
 
                 delay(400)
+                fetchRandomChallengeAndPokemon()
             } finally {
                 finishSpinRound()
             }
@@ -120,30 +121,28 @@ class ChallengeViewModel(application: Application) : AndroidViewModel(applicatio
         _isSpinning.value = false
     }
 
-    // Reservado para HU 12: mostrar reto aleatorio con Pokémon
-    private suspend fun fetchRandomChallengeAndPokemon() {
-        try {
-            // Cargar retos de la BD de forma asíncrona si la lista está vacía en memoria
-            val localChallenges = _listChallenge.value ?: repository.getListChallenge()
-            val randomChallenge = if (!localChallenges.isNullOrEmpty()) {
-                localChallenges[Random.nextInt(localChallenges.size)]
-            } else {
-                Challenge(id = 0, description = "¡Reto por defecto! Baila por 1 minuto.")
-            }
+    // Lógica para obtener reto aleatorio (Pokémon pospuesto para futura HU)
+    fun fetchRandomChallengeAndPokemon() {
+        viewModelScope.launch {
+            try {
+                // 1. Obtener reto aleatorio de Room
+                val localChallenges = repository.getListChallenge()
+                val randomChallenge = if (localChallenges.isNotEmpty()) {
+                    localChallenges[Random.nextInt(localChallenges.size)]
+                } else {
+                    Challenge(id = 0, description = "¡Reto por defecto! Baila por 1 minuto.")
+                }
 
-            // Consumir el listado de Pokémon utilizando el repositorio corregido del profesor
-            val pokemonResponse = repository.getPokemonFromApi()
-            val pokemonList = pokemonResponse?.results // Accedemos a '.results' del mapping que hicimos
+                // TODO: Integrar API de Pokémon en esta sección.
+                // Por ahora se envía un objeto vacío para cumplir con la firma del Pair
+                val placeholderPokemon = PokemonResult("", "")
 
-            if (!pokemonList.isNullOrEmpty()) {
-                val randomPokemon = pokemonList[Random.nextInt(pokemonList.size)]
-                _randomChallengeResult.value = Pair(randomChallenge, randomPokemon)
-            } else {
-                // Respaldo si no hay internet o falla la API
-                _randomChallengeResult.value = Pair(randomChallenge, PokemonResult("Univalle", ""))
+                // 3. Emitir el resultado (Solo el reto es funcional actualmente)
+                _randomChallengeResult.value = Pair(randomChallenge, placeholderPokemon)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                _randomChallengeResult.value = null
             }
-        } catch (e: Exception) {
-            e.printStackTrace()
         }
     }
 
